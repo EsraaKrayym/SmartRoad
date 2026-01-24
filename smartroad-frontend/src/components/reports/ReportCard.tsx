@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Report } from "../../types/report";
+import type { Report } from "../../types/report";
 import StatusBadge from "./StatusBadge";
 
 export default function ReportCard({ r }: { r: Report }) {

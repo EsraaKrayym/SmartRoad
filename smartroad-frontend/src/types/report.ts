@@ -1,6 +1,6 @@
 export type ReportStatus = "NEW" | "IN_PROGRESS" | "DONE";
 
-export type Report = {
+export interface Report {
     id: string;
     title: string;
     description: string;
@@ -9,5 +9,7 @@ export type Report = {
     lng: number;
     imageUrl?: string;
     status: ReportStatus;
-    createdAt: string; // ISO
-};
+    createdAt: string;
+}
+
+console.log("report.ts loaded");

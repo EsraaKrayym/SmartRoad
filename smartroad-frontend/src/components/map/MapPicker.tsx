@@ -14,7 +14,7 @@ function ClickHandler({ onPick }: { onPick: (p: LatLng) => void }) {
 }
 
 // fix default marker icons in many bundlers
-const markerIcon = new L.Icon({
+const markerIcon = new L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
     iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
     shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",

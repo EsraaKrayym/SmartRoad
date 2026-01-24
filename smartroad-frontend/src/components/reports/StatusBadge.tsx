@@ -1,4 +1,4 @@
-import { ReportStatus } from "../../types/report";
+import type { ReportStatus } from "../../types/report";
 
 export default function StatusBadge({ status }: { status: ReportStatus }) {
     const map: Record<ReportStatus, { text: string }> = {

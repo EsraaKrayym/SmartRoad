@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { listReports, updateReportStatus } from "../api/reports.api";
-import { Report, ReportStatus } from "../types/report";
+import { listReports, updateReportStatus } from "../api/report.api.ts";
+import type{ Report, ReportStatus } from "../types/report";
 import Button from "../components/ui/Button";
 import StatusBadge from "../components/reports/StatusBadge";
 

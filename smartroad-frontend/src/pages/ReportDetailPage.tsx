@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getReport } from "../api/reports.api";
-import { Report } from "../types/report";
+import { getReport } from "../api/report.api.ts";
+import type { Report } from "../types/report";
 import MapViewer from "../components/map/MapViewer";
 import StatusBadge from "../components/reports/StatusBadge";
 

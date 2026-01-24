@@ -1,5 +1,5 @@
-import { ReportStatus } from "../../types/report";
-import Field from "../ui/Field";
+import type { ReportStatus } from "../../types/report";
+
 
 export default function ReportFilters({
                                           status,

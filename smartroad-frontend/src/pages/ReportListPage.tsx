@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { listReports } from "../api/reports.api";
-import { Report, ReportStatus } from "../types/report";
+import { listReports } from "../api/report.api.ts";
+import type { Report, ReportStatus } from "../types/report";
 import ReportCard from "../components/reports/ReportCard";
 import ReportFilters from "../components/reports/ReportFilters";
 

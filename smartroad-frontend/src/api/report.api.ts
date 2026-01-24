@@ -1,8 +1,7 @@
-import { Report, ReportStatus } from "../types/report";
+import type { Report, ReportStatus } from "../types/report";
 
 /**
- * مؤقتًا: بيانات Mock حتى نكمل Frontend بدون Backend.
- * لاحقًا نستبدلها باستدعاءات http.get/post/patch.
+ * Mock-Daten für Frontend ohne Backend
  */
 let MOCK: Report[] = [
     {
@@ -10,8 +9,8 @@ let MOCK: Report[] = [
         title: "Pothole near intersection",
         description: "Deep pothole, cars swerve to avoid it.",
         category: "POTHOLE",
-        lat: 52.5200,
-        lng: 13.4050,
+        lat: 52.52,
+        lng: 13.405,
         status: "NEW",
         createdAt: new Date().toISOString(),
     },
@@ -20,10 +19,15 @@ let MOCK: Report[] = [
 export async function listReports(params?: { status?: ReportStatus; q?: string }) {
     const { status, q } = params || {};
     let data = [...MOCK];
+
     if (status) data = data.filter(r => r.status === status);
     if (q) {
         const s = q.toLowerCase();
-        data = data.filter(r => r.title.toLowerCase().includes(s) || r.description.toLowerCase().includes(s));
+        data = data.filter(
+            r =>
+                r.title.toLowerCase().includes(s) ||
+                r.description.toLowerCase().includes(s)
+        );
     }
     return data;
 }
@@ -34,7 +38,9 @@ export async function getReport(id: string) {
     return r;
 }
 
-export async function createReport(input: Omit<Report, "id" | "createdAt" | "status">) {
+export async function createReport(
+    input: Omit<Report, "id" | "createdAt" | "status">
+) {
     const newReport: Report = {
         ...input,
         id: crypto.randomUUID(),

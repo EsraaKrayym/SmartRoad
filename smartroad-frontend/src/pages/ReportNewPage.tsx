@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Field from "../components/ui/Field";
+
 import Button from "../components/ui/Button";
 import MapPicker from "../components/map/MapPicker";
-import { createReport } from "../api/reports.api";
+import { createReport } from "../api/report.api.ts";
 
 export default function ReportNewPage() {
     const nav = useNavigate();
