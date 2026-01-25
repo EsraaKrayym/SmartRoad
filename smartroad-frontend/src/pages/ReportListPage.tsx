@@ -10,8 +10,12 @@ export default function ReportListPage() {
     const [q, setQ] = useState("");
 
     useEffect(() => {
-        listReports({ status: status || undefined, q: q || undefined }).then(setItems);
+        listReports({
+            status: status || undefined,
+            q: q || undefined,
+        }).then(setItems);
     }, [status, q]);
+
 
     return (
         <div style={{ display: "grid", gap: 12 }}>

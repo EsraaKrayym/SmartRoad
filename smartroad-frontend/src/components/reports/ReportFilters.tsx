@@ -16,29 +16,26 @@ export default function ReportFilters({
 
             <div className="row">
                 <div className="col">
-                    <Field label="Search">
-                        <input
-                            value={q}
-                            onChange={(e) => onChange({ status, q: e.target.value })}
-                            placeholder="title or description..."
-                            style={{ padding: 10, borderRadius: 10, border: "1px solid #e7e8ee" }}
-                        />
-                    </Field>
+                    <label style={{fontWeight: 600}}>Search</label>
+                    <input
+                        value={q}
+                        onChange={(e) => onChange({status, q: e.target.value})}
+                        placeholder="title or description..."
+                    />
                 </div>
 
                 <div className="col">
-                    <Field label="Status">
+                        <label style={{fontWeight: 600}}>Status</label>
                         <select
                             value={status}
-                            onChange={(e) => onChange({ status: (e.target.value as any) || "", q })}
-                            style={{ padding: 10, borderRadius: 10, border: "1px solid #e7e8ee" }}
+                            onChange={(e) => onChange({status: (e.target.value as any) || "", q})}
+                            style={{padding: 10, borderRadius: 10, border: "1px solid #e7e8ee"}}
                         >
                             <option value="">All</option>
                             <option value="NEW">New</option>
                             <option value="IN_PROGRESS">In progress</option>
                             <option value="DONE">Done</option>
                         </select>
-                    </Field>
                 </div>
             </div>
         </div>

@@ -1,57 +1,36 @@
+import { http } from "./http";
 import type { Report, ReportStatus } from "../types/report";
 
-/**
- * Mock-Daten für Frontend ohne Backend
- */
-let MOCK: Report[] = [
-    {
-        id: "r1",
-        title: "Pothole near intersection",
-        description: "Deep pothole, cars swerve to avoid it.",
-        category: "POTHOLE",
-        lat: 52.52,
-        lng: 13.405,
-        status: "NEW",
-        createdAt: new Date().toISOString(),
-    },
-];
-
-export async function listReports(params?: { status?: ReportStatus; q?: string }) {
-    const { status, q } = params || {};
-    let data = [...MOCK];
-
-    if (status) data = data.filter(r => r.status === status);
-    if (q) {
-        const s = q.toLowerCase();
-        data = data.filter(
-            r =>
-                r.title.toLowerCase().includes(s) ||
-                r.description.toLowerCase().includes(s)
-        );
-    }
-    return data;
+export async function listReports(params?: {
+    status?: string;
+    q?: string;
+}): Promise<Report[]> {
+    const res = await http.get<Report[]>("/reports/", {
+        params,
+    });
+    return res.data;
 }
 
-export async function getReport(id: string) {
-    const r = MOCK.find(x => x.id === id);
-    if (!r) throw new Error("Not found");
-    return r;
+export async function getReport(id: string): Promise<Report> {
+    const res = await http.get<Report>(`/reports/${id}`);
+    return res.data;
 }
 
-export async function createReport(
-    input: Omit<Report, "id" | "createdAt" | "status">
-) {
-    const newReport: Report = {
-        ...input,
-        id: crypto.randomUUID(),
-        createdAt: new Date().toISOString(),
-        status: "NEW",
-    };
-    MOCK = [newReport, ...MOCK];
-    return newReport;
+export async function createReport(input: {
+    title: string;
+    description: string;
+    category: string;
+    lat: number;
+    lng: number;
+}): Promise<Report> {
+    const res = await http.post<Report>("/reports/", input);
+    return res.data;
 }
 
-export async function updateReportStatus(id: string, status: ReportStatus) {
-    MOCK = MOCK.map(r => (r.id === id ? { ...r, status } : r));
-    return getReport(id);
+export async function updateReportStatus(
+    id: string,
+    status: ReportStatus
+): Promise<Report> {
+    const res = await http.patch<Report>(`/reports/${id}/status`, { status });
+    return res.data;
 }
