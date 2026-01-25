@@ -31,6 +31,8 @@ export async function updateReportStatus(
     id: string,
     status: ReportStatus
 ): Promise<Report> {
-    const res = await http.patch<Report>(`/reports/${id}/status`, { status });
+    const res = await http.patch<Report>(`/reports/${id}/status`, {
+        status,
+    });
     return res.data;
 }

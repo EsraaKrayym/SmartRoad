@@ -1,56 +1,76 @@
 import { useEffect, useState } from "react";
-import { listReports, updateReportStatus } from "../api/report.api.ts";
-import type{ Report, ReportStatus } from "../types/report";
+import { listReports, updateReportStatus } from "../api/report.api";
+import type { Report, ReportStatus } from "../types/report";
 import Button from "../components/ui/Button";
 import StatusBadge from "../components/reports/StatusBadge";
 
 export default function AdminDashboardPage() {
     const [items, setItems] = useState<Report[]>([]);
 
-    async function refresh() {
-        const data = await listReports();
-        setItems(data);
-    }
+    useEffect(() => {
+        listReports().then(setItems);
+    }, []);
 
-    useEffect(() => { refresh(); }, []);
-
-    async function setStatus(id: string, status: ReportStatus) {
-        await updateReportStatus(id, status);
-        await refresh();
-    }
+    const onStatusChange = async (id: string, status: ReportStatus) => {
+        const updated = await updateReportStatus(id, status);
+        setItems((prev) =>
+            prev.map((r) => (r.id === id ? updated : r))
+        );
+    };
 
     return (
         <div style={{ display: "grid", gap: 12 }}>
-            <div style={{ fontSize: 22, fontWeight: 900 }}>Admin Dashboard</div>
+            <div style={{ fontSize: 22, fontWeight: 900 }}>
+                Admin Dashboard
+            </div>
 
             <div className="card" style={{ overflowX: "auto" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse" }}>
                     <thead>
-                    <tr style={{ textAlign: "left" }}>
-                        <th style={{ padding: 10, borderBottom: "1px solid #e7e8ee" }}>Title</th>
-                        <th style={{ padding: 10, borderBottom: "1px solid #e7e8ee" }}>Status</th>
-                        <th style={{ padding: 10, borderBottom: "1px solid #e7e8ee" }}>Actions</th>
+                    <tr>
+                        <th style={{ padding: 10 }}>Title</th>
+                        <th style={{ padding: 10 }}>Status</th>
+                        <th style={{ padding: 10 }}>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {items.map((r) => (
                         <tr key={r.id}>
-                            <td style={{ padding: 10, borderBottom: "1px solid #f0f1f5" }}>{r.title}</td>
-                            <td style={{ padding: 10, borderBottom: "1px solid #f0f1f5" }}>
+                            <td style={{ padding: 10 }}>{r.title}</td>
+                            <td style={{ padding: 10 }}>
                                 <StatusBadge status={r.status} />
                             </td>
-                            <td style={{ padding: 10, borderBottom: "1px solid #f0f1f5" }}>
-                                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                                    <Button variant="ghost" onClick={() => setStatus(r.id, "NEW")}>New</Button>
-                                    <Button variant="ghost" onClick={() => setStatus(r.id, "IN_PROGRESS")}>In progress</Button>
-                                    <Button variant="ghost" onClick={() => setStatus(r.id, "DONE")}>Done</Button>
+                            <td style={{ padding: 10 }}>
+                                <div style={{ display: "flex", gap: 8 }}>
+                                    <Button
+                                        variant="ghost"
+                                        onClick={() => onStatusChange(r.id, "NEW")}
+                                    >
+                                        New
+                                    </Button>
+                                    <Button
+                                        variant="ghost"
+                                        onClick={() => onStatusChange(r.id, "IN_PROGRESS")}
+                                    >
+                                        In progress
+                                    </Button>
+                                    <Button
+                                        variant="ghost"
+                                        onClick={() => onStatusChange(r.id, "DONE")}
+                                    >
+                                        Done
+                                    </Button>
                                 </div>
                             </td>
                         </tr>
                     ))}
-                    {items.length === 0 ? (
-                        <tr><td colSpan={3} style={{ padding: 10 }}>No reports.</td></tr>
-                    ) : null}
+                    {items.length === 0 && (
+                        <tr>
+                            <td colSpan={3} style={{ padding: 10 }}>
+                                No reports.
+                            </td>
+                        </tr>
+                    )}
                     </tbody>
                 </table>
             </div>

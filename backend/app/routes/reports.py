@@ -2,9 +2,14 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import Optional
 from sqlalchemy import or_
+from pydantic import BaseModel
 
 from ..database import SessionLocal
 from .. import models, schemas
+
+class StatusUpdate(BaseModel):
+    status: str
+
 
 router = APIRouter(prefix="/reports", tags=["Reports"])
 
@@ -50,3 +55,18 @@ def create_report(report: schemas.ReportCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_report)
     return db_report
+
+@router.patch("/{report_id}/status", response_model=schemas.ReportOut)
+def update_report_status(
+        report_id: str,
+        body: StatusUpdate,
+        db: Session = Depends(get_db),
+):
+    report = db.query(models.Report).filter(models.Report.id == report_id).first()
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+
+    report.status = body.status
+    db.commit()
+    db.refresh(report)
+    return report
