@@ -1,16 +1,16 @@
 import React from "react";
-import ReactDOM, {createRoot} from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import "./styles.css";
-
-// Leaflet CSS لازم
-import "leaflet/dist/leaflet.css";
+import { RoleProvider } from "./context/RoleContext";
+import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <BrowserRouter>
-            <App />
+            <RoleProvider>
+                <App />
+            </RoleProvider>
         </BrowserRouter>
     </React.StrictMode>
 );

@@ -1,5 +1,7 @@
 import { http } from "./http";
 import type { Report, ReportStatus } from "../types/report";
+import axios from "axios";
+
 
 export async function listReports(params?: {
     status?: string;
@@ -8,6 +10,7 @@ export async function listReports(params?: {
     const res = await http.get<Report[]>("/reports/", {
         params,
     });
+
     return res.data;
 }
 
@@ -31,8 +34,15 @@ export async function updateReportStatus(
     id: string,
     status: ReportStatus
 ): Promise<Report> {
-    const res = await http.patch<Report>(`/reports/${id}/status`, {
-        status,
-    });
+    const res = await axios.patch(
+        `http://localhost:8000/reports/${id}/status`,
+        { status },
+        {
+            headers: {
+                "X-Role": "ADMIN",
+            },
+        }
+    );
+
     return res.data;
 }

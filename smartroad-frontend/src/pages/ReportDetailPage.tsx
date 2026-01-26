@@ -1,52 +1,76 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getReport } from "../api/report.api.ts";
+import { useParams, Link } from "react-router-dom";
+import { getReport } from "../api/report.api";
 import type { Report } from "../types/report";
-import MapViewer from "../components/map/MapViewer";
 import StatusBadge from "../components/reports/StatusBadge";
+import ReportsMap from "../components/map/ReportsMap";
 
 export default function ReportDetailPage() {
-    const { id } = useParams();
-    const [r, setR] = useState<Report | null>(null);
-    const [err, setErr] = useState<string>("");
+    const { id } = useParams<{ id: string }>();
+    const [report, setReport] = useState<Report | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!id) return;
-        getReport(id).then(setR).catch((e) => setErr(String(e?.message || e)));
+
+        getReport(id)
+            .then(setReport)
+            .finally(() => setLoading(false));
     }, [id]);
 
-    if (err) return <div className="card">Error: {err}</div>;
-    if (!r) return <div className="card">Loading...</div>;
+    if (loading) {
+        return <div className="card">Loading report...</div>;
+    }
+
+    if (!report) {
+        return <div className="card">Report not found.</div>;
+    }
 
     return (
-        <div className="row">
-            <div className="col">
-                <div className="card" style={{ display: "grid", gap: 10 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
-                        <div style={{ fontWeight: 900, fontSize: 18 }}>{r.title}</div>
-                        <StatusBadge status={r.status} />
-                    </div>
-                    <div style={{ opacity: 0.85 }}>{r.description}</div>
+        <div style={{ display: "grid", gap: 16 }}>
+            {/* 🔙 Back */}
+            <Link to="/app/reports" style={{ textDecoration: "none" }}>
+                ← Back to reports
+            </Link>
 
-                    <div style={{ fontSize: 12, opacity: 0.7 }}>
-                        Category: <b>{r.category}</b> · Created: {new Date(r.createdAt).toLocaleString()}
-                    </div>
-
-                    {r.imageUrl ? (
-                        <img
-                            src={r.imageUrl}
-                            alt="report"
-                            style={{ width: "100%", borderRadius: 12, border: "1px solid #e7e8ee" }}
-                        />
-                    ) : null}
+            {/* 🧾 Report Info */}
+            <div className="card" style={{ maxWidth: 700 }}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <h2>Report #{report.id}</h2>
+                    <StatusBadge status={report.status} />
                 </div>
+
+                <p><b>Address:</b> {report.address}</p>
+                <p>
+                    <b>Danger level:</b>{" "}
+                    {report.dangerLevel === "LOW" && "🟢 Low"}
+                    {report.dangerLevel === "MEDIUM" && "🟡 Medium"}
+                    {report.dangerLevel === "HIGH" && "🔴 Dangerous"}
+                </p>
+                <p><b>Description:</b> {report.description}</p>
+                <p>
+                    <b>Date:</b>{" "}
+                    {new Date(report.createdAt).toLocaleString()}
+                </p>
+
+                {report.imageUrl && (
+                    <img
+                        src={report.imageUrl}
+                        alt="report"
+                        style={{
+                            width: "100%",
+                            marginTop: 12,
+                            borderRadius: 12,
+                            border: "1px solid #e7e8ee",
+                        }}
+                    />
+                )}
             </div>
 
-            <div className="col">
-                <div className="card" style={{ display: "grid", gap: 10 }}>
-                    <div style={{ fontWeight: 800 }}>Location</div>
-                    <MapViewer lat={r.lat} lng={r.lng} label={r.title} />
-                </div>
+            {/* 🗺️ Map */}
+            <div className="card">
+                <h3>Location</h3>
+                <ReportsMap reports={[report]} />
             </div>
         </div>
     );

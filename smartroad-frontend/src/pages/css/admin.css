@@ -1,0 +1,199 @@
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7fb;
+}
+/* Card */
+.card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(14px);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: -15px;
+
+}
+
+.sidebar {
+    width: 240px;
+    background: #162d6b;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 30px;
+
+}
+
+.sidebar a {
+    color: #cfd8ff;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-bottom: 6px;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background: #f4c430;
+    color: #162d6b;
+}
+
+.admin-footer {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.avatar {
+    background: #f4c430;
+    color: black;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* Stats cards */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.stat-card span {
+    font-size: 14px;
+    opacity: 0.9;
+
+}
+
+.stat-card strong {
+    font-size: 34px;
+    font-weight: 900;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+
+/* 👇 DAS IST ENTSCHEIDEND */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Links */
+.sidebar-nav a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* Aktiver Link */
+.sidebar-nav a.active {
+    background: #f4c430;
+    color: #162d6b;
+}
+/* Container für die Blocks */
+.quick-actions {
+    margin-top: 40px;
+}
+
+.quick-actions h3 {
+    margin-bottom: 16px;
+}
+
+/* GRID für die Karten */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+/* Einzelne Karte */
+.quick-item {
+    background: rgba(105, 146, 206, 0.96);
+    border-radius: 20px;
+    padding: 28px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover Effekt */
+.quick-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(0,0,0,0.15);
+}
+/* Titel */
+.quick-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* GRID NUR für die Blocks */
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+/* ROW → alles NEBENEINANDER */
+.quick-row {
+    display: flex;
+    gap: 24px;
+}
+/* Cards */
+.quick-card {
+    flex: 1; /* alle gleich breit */
+    background: #7d97c9;
+    color: white;
+    padding: 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.quick-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+}
+
+
+

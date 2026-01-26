@@ -1,0 +1,77 @@
+.role-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f4f6fb, #e9ecf5);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.role-card {
+    background: white;
+    padding: 48px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.role-card h1 {
+    margin-bottom: 8px;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 32px;
+}
+
+.role-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.role-option {
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 24px 16px;
+    cursor: pointer;
+    background: #f7f8fc;
+    transition: all 0.25s ease;
+    text-align: center;
+}
+
+.role-option .icon {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.role-option h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.role-option p {
+    font-size: 13px;
+    color: #666;
+    margin-top: 6px;
+}
+
+.role-option:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.role-option.user:hover {
+    border-color: #4f46e5;
+    background: #eef2ff;
+}
+
+.role-option.admin:hover {
+    border-color: #dc2626;
+    background: #fff1f2;
+}

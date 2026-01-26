@@ -1,66 +1,112 @@
+/* 🌍 Global Reset */
+* {
+  box-sizing: border-box;
+}
+
+/* 🌐 Root */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* 🌈 Body Background (Glass App) */
 body {
   margin: 0;
-  min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(135deg, #c7cdf3, rgba(112, 63, 161, 0.76));
+  color: #ffffff;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+/* 🔗 Links */
+a {
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  color: #6f7cff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #8f9bff;
+}
+
+/* 🧱 Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* 🧊 Glass Card */
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 24px;
+  box-shadow:
+          0 30px 60px rgba(0,0,0,0.2),
+          inset 0 0 0 1px rgba(255,255,255,0.2);
+}
+
+/* ✏️ Inputs */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.25);
+  color: #2b2b2b;
+  font-size: 15px;
+  backdrop-filter: blur(8px);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(60,60,60,0.6);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #6f7cff;
+  box-shadow: 0 0 0 2px rgba(111,124,255,0.25);
+}
+
+/* 🔘 Button */
+button {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, #6f7cff, #8f9bff);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 button:hover {
-  border-color: #646cff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 }
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.6);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* 🗺️ Leaflet Map */
+.leaflet-container {
+  width: 100%;
+  height: 420px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.25);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }

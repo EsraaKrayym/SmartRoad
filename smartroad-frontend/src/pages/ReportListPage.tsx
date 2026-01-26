@@ -9,16 +9,15 @@ export default function ReportListPage() {
     const [items, setItems] = useState<Report[]>([]);
     const [status, setStatus] = useState<"" | ReportStatus>("");
     const [q, setQ] = useState("");
+    const [reports, setReports] = useState<Report[]>([]);
 
-    <ReportsMap reports={items} />
+
 
 
     useEffect(() => {
-        listReports({
-            status: status || undefined,
-            q: q || undefined,
-        }).then(setItems);
-    }, [status, q]);
+        listReports().then(setReports);
+    }, []);
+    <ReportsMap reports={reports} />
 
 
     return (

@@ -3,7 +3,7 @@ import { listReports, updateReportStatus } from "../api/report.api";
 import type { Report, ReportStatus } from "../types/report";
 import Button from "../components/ui/Button";
 import StatusBadge from "../components/reports/StatusBadge";
-
+import axios from "axios";
 export default function AdminDashboardPage() {
     const [items, setItems] = useState<Report[]>([]);
 
@@ -17,10 +17,14 @@ export default function AdminDashboardPage() {
             prev.map((r) => (r.id === id ? updated : r))
         );
     };
+    type Props = {
+        reports: Report[];
+        onStatusChange: (report: Report) => void;
+    };
 
     return (
         <div style={{ display: "grid", gap: 12 }}>
-            <div style={{ fontSize: 22, fontWeight: 900 }}>
+            <div style={{ fontSize: 30, fontWeight: 900 }}>
                 Admin Dashboard
             </div>
 

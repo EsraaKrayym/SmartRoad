@@ -1,6 +1,12 @@
 import axios from "axios";
 
 export const http = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8000",
-    timeout: 10_000,
+    baseURL: "http://localhost:8000",
+    timeout: 10000,
+});
+
+http.interceptors.request.use((config) => {
+    const role = localStorage.getItem("role") || "USER";
+    config.headers["X-Role"] = role;
+    return config;
 });

@@ -1,12 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
-from .database import Base, engine
-from .routes import reports
+from app.routes import reports
+from app.database import Base, engine
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="SmartRoad Backend")
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
