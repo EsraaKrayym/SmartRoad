@@ -46,3 +46,18 @@ export async function updateReportStatus(
 
     return res.data;
 }
+export async function createAIReport(data: {
+    address: string;
+    lat: number;
+    lng: number;
+    danger_level: string;
+    description?: string;
+    ai_confidence: number;
+    ai_box_width: number;
+    ai_box_height: number;
+    severity: string;
+}) {
+    const res = await http.post("/reports/", data);
+    return res.data;
+}
+

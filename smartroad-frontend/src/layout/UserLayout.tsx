@@ -1,5 +1,5 @@
 // src/layout/UserLayout.tsx
-import { Outlet, Link } from "react-router-dom";
+import {Outlet, Link, NavLink} from "react-router-dom";
 
 export default function UserLayout() {
     return (
@@ -9,6 +9,7 @@ export default function UserLayout() {
                 <Link to="/app">Map</Link>
                 <Link to="/app/reports">Reports</Link>
                 <Link to="/app/new">Create Report</Link>
+                <Link to="/app/ai-report">KI melden</Link>
                 <Link to="/login">Logout</Link>
             </header>
 

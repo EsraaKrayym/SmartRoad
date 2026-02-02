@@ -14,6 +14,8 @@ import DashboardPage from "./pages/admin/DashboardPage";
 import AdminReportsPage from "./pages/admin/AdminReportsPage.tsx";
 import MapPage from "./pages/admin/MapPage";
 import UsersPage from "./pages/admin/UsersPage";
+import PotholeDetectionPage from "./pages/user/PotholeDetectionPage.tsx";
+import CreateAIReportPage from "./pages/user/ai-report/CreateAIReportPage";
 
 export default function App() {
     const { role } = useRole();
@@ -30,6 +32,10 @@ export default function App() {
                 <Route path="reports" element={<ReportsPage />} />
                 <Route path="reports/:id" element={<ReportDetailPage />} />
                 <Route path="new" element={<CreateReportPage />} />
+                {/* KI – FIX */}
+                <Route path="detect" element={<PotholeDetectionPage />} />
+                <Route path="ai-report" element={<CreateAIReportPage />} />
+
             </Route>
 
 
