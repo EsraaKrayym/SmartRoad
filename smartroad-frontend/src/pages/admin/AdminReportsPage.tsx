@@ -34,7 +34,7 @@ export default function AdminReportsPage() {
                         {/* Image */}
                         {r.image_url && (
                             <img
-                                src={r.image_url}
+                                src={`http://localhost:8000/${r.image_url}`}
                                 alt="report"
                                 style={{
                                     width: "100%",
